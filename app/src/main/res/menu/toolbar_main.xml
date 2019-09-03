@@ -13,4 +13,9 @@
         android:icon="@drawable/icon_proximo_mes"
         android:title="Próximo Mês"
         app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/item_logOut"
+        android:icon="@drawable/icon_log_out"
+        android:title="Sair" />
 </menu>

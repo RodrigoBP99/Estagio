@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,14 @@ public class ConsultaAdapter extends RecyclerView.Adapter<ConsultaAdapter.Consul
         consultaViewHolder.textViewHorario.setText(consulta.getHorario());
         consultaViewHolder.textViewNomeMedico.setText(consulta.getNomeMedico());
         consultaViewHolder.textViewNomePaciente.setText(consulta.getNomePaciente());
+
+        consultaViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Abrir descrição da Consulta", Toast.LENGTH_SHORT).show();
+                //context.startActivity(new Intent(context, DescricaoConsultaActivity.class));
+            }
+        });
     }
 
     @Override
