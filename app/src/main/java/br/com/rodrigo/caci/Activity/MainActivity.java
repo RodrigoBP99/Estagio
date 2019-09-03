@@ -1,5 +1,6 @@
 package br.com.rodrigo.caci.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -45,21 +46,14 @@ public class MainActivity extends AppCompatActivity {
         consulta1.setData("03/09/2019");
         consulta1.setDiaSemana("Segunda-Feira");
         consulta1.setHorario("10:00");
-        consulta1.setNomePaciente("Rodrigo Boza");
+        consulta1.setNomePaciente("Mirmidão de Pompeia");
         consulta1.setNomeMedico("Dr. Dante");
         consultas.add(consulta1);
 
         consultaAdapter = new ConsultaAdapter(consultas, this);
         recyclerView.setAdapter(consultaAdapter);
 
-        FloatingActionButton buttonNovaConsulta = findViewById(R.id.floatButtonNovaConsulta);
-        buttonNovaConsulta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Nova Consulta", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(MainActivity.this, NovaConsultaActivity.class));
-            }
-        });
+        novaConsulta();
 
     }
 
@@ -89,6 +83,16 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void novaConsulta() {
+        FloatingActionButton buttonNovaConsulta = findViewById(R.id.floatButtonNovaConsulta);
+        buttonNovaConsulta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, NovaConsultaActivity.class));
+            }
+        });
     }
 
 

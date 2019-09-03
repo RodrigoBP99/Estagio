@@ -1,16 +1,17 @@
 package br.com.rodrigo.caci.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import br.com.rodrigo.caci.Activity.DescricaoConsultaActivity;
 import br.com.rodrigo.caci.Model.Consulta;
 import br.com.rodrigo.caci.R;
 
@@ -32,7 +33,7 @@ public class ConsultaAdapter extends RecyclerView.Adapter<ConsultaAdapter.Consul
 
     @Override
     public void onBindViewHolder(@NonNull ConsultaViewHolder consultaViewHolder, int posicao) {
-        Consulta consulta = consultas.get(posicao);
+        final Consulta consulta = consultas.get(posicao);
 
         consultaViewHolder.textViewData.setText(consulta.getData());
         consultaViewHolder.textViewDiaSemana.setText(consulta.getDiaSemana());
@@ -43,8 +44,9 @@ public class ConsultaAdapter extends RecyclerView.Adapter<ConsultaAdapter.Consul
         consultaViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Abrir descrição da Consulta", Toast.LENGTH_SHORT).show();
-                //context.startActivity(new Intent(context, DescricaoConsultaActivity.class));
+                Intent intent = new Intent(context, DescricaoConsultaActivity.class);
+                intent.putExtra("nomePaciente", consulta.getNomePaciente());
+                context.startActivity(intent);
             }
         });
     }
