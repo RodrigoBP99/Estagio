@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import br.com.rodrigo.caci.Adapter.ConsultaAdapter;
 import br.com.rodrigo.caci.Model.Consulta;
@@ -21,7 +22,7 @@ import br.com.rodrigo.caci.R;
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Consulta> consultas = new ArrayList<>();
     private ConsultaAdapter consultaAdapter;
-
+    private Calendar calendar = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerViewConsultas);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        getSupportActionBar().setTitle("Mes Atual");
+        getMonth(calendar);
 
         Consulta consulta = new Consulta();
         consulta.setData("02/09/2019");
@@ -71,14 +72,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.item_mes_anterior:
-                //adicionar metodo para voltar o mês exibido
-                Toast.makeText(MainActivity.this, "Voltar Mês", Toast.LENGTH_SHORT).show();
+                //otimizar metodo para voltar o mês exibido
+                calendar.add(Calendar.MONTH, -1);
+                getMonth(calendar);
                 return true;
             case R.id.item_proximo_mes:
-                //adicionar metodo para avançar mês exibido
-                Toast.makeText(MainActivity.this, "Avançar Mês", Toast.LENGTH_SHORT).show();
+                //otimizar metodo para avançar mês exibido
+                calendar.add(Calendar.MONTH, 1);
+                getMonth(calendar);
                 return true;
             case R.id.item_logOut:
                 //criar metodo para sair da conta do app
@@ -87,4 +90,51 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    private boolean getMonth(Calendar calendar) {
+
+        int month = calendar.get(Calendar.MONTH);
+        int year = calendar.get(Calendar.YEAR);
+        switch (month) {
+            case 0:
+                getSupportActionBar().setTitle("Janeiro " + year);
+                return true;
+            case 1:
+                getSupportActionBar().setTitle("Fevereiro " + year);
+                return true;
+            case 2:
+                getSupportActionBar().setTitle("Março " + year);
+                return true;
+            case 3:
+                getSupportActionBar().setTitle("Abril " + year);
+                return true;
+            case 4:
+                getSupportActionBar().setTitle("Maio " + year);
+                return true;
+            case 5:
+                getSupportActionBar().setTitle("Junho "+ year);
+                return true;
+            case 6:
+                getSupportActionBar().setTitle("Julho " +  year);
+                return true;
+            case 7:
+                getSupportActionBar().setTitle("Agosto " + + year);
+                return true;
+            case 8:
+                getSupportActionBar().setTitle("Setembro " + year);
+                return true;
+            case 9:
+                getSupportActionBar().setTitle("Outubro " + year);
+                return true;
+            case 10:
+                getSupportActionBar().setTitle("Novembro " + year);
+                return true;
+            case 11:
+                getSupportActionBar().setTitle("Dezembro " + year);
+                return true;
+        }
+        return false;
+    }
+
 }
