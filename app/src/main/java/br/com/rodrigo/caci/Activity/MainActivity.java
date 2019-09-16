@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -96,49 +97,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private boolean getMonth(Calendar calendar) {
-
-        int month = calendar.get(Calendar.MONTH);
-        int year = calendar.get(Calendar.YEAR);
-        switch (month) {
-            case 0:
-                getSupportActionBar().setTitle("Janeiro " + year);
-                return true;
-            case 1:
-                getSupportActionBar().setTitle("Fevereiro " + year);
-                return true;
-            case 2:
-                getSupportActionBar().setTitle("Março " + year);
-                return true;
-            case 3:
-                getSupportActionBar().setTitle("Abril " + year);
-                return true;
-            case 4:
-                getSupportActionBar().setTitle("Maio " + year);
-                return true;
-            case 5:
-                getSupportActionBar().setTitle("Junho "+ year);
-                return true;
-            case 6:
-                getSupportActionBar().setTitle("Julho " +  year);
-                return true;
-            case 7:
-                getSupportActionBar().setTitle("Agosto " + + year);
-                return true;
-            case 8:
-                getSupportActionBar().setTitle("Setembro " + year);
-                return true;
-            case 9:
-                getSupportActionBar().setTitle("Outubro " + year);
-                return true;
-            case 10:
-                getSupportActionBar().setTitle("Novembro " + year);
-                return true;
-            case 11:
-                getSupportActionBar().setTitle("Dezembro " + year);
-                return true;
-        }
-        return false;
+    private void getMonth(Calendar calendar) {
+        Calendar data = Calendar.getInstance();
+        data.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
+        data.set(Calendar.YEAR, calendar.get(Calendar.YEAR));
+        String format = new SimpleDateFormat("MMMM yyyy").format(data.getTime());
+        String upcase = format.substring(0,1).toUpperCase() + format.substring(1);
+        getSupportActionBar().setTitle(upcase);
     }
-
 }
