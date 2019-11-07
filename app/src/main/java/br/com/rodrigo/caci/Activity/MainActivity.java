@@ -2,14 +2,13 @@ package br.com.rodrigo.caci.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -19,18 +18,24 @@ import java.util.Calendar;
 import br.com.rodrigo.caci.Adapter.ConsultaAdapter;
 import br.com.rodrigo.caci.Model.Consulta;
 import br.com.rodrigo.caci.R;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Consulta> consultas = new ArrayList<>();
     private ConsultaAdapter consultaAdapter;
     private Calendar calendar = Calendar.getInstance();
+    @BindView(R.id.recyclerViewConsultas)
+    RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewConsultas);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         getMonth(calendar);
@@ -53,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
         consultaAdapter = new ConsultaAdapter(consultas, this);
         recyclerView.setAdapter(consultaAdapter);
-
-        novaConsulta();
-
     }
 
     @Override
@@ -86,16 +88,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void novaConsulta() {
-        FloatingActionButton buttonNovaConsulta = findViewById(R.id.floatButtonNovaConsulta);
-        buttonNovaConsulta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, NovaConsultaActivity.class));
-            }
-        });
+    @OnClick(R.id.floatButtonNovaConsulta) void novaConsulta(){
+        startActivity(new Intent(MainActivity.this, NovaConsultaActivity.class));
     }
-
 
     private void getMonth(Calendar calendar) {
         Calendar data = Calendar.getInstance();
